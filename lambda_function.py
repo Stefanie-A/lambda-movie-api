@@ -13,18 +13,22 @@ def lambda_handler(event, context):
     body = {}    
     statusCode = 200
     table.put_item(
-        Item1={
+        Item={
             'title': 'Perfect find',
             'year': '2018',
             'thumbnailuri': '',
             'genre': 'comedy'
-        }
-        Item2={
+            }
+    )
+    table.put_item(
+        Item={
             'title': 'gifted',
             'year': '2017',
             'thumbnailuri': '',
             'genre': 'Drama'
         }
+    )
+    table.put_item(    
         Item3={
             'title': 'players',
             'year': '2024',
