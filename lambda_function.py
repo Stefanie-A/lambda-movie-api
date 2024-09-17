@@ -51,8 +51,8 @@ def lambda_handler(event, context):
             body = responseBody
         elif event['routekey'] == "GET /items/{year}":
             body = table.get_item(
-                key={'title': event['pathparameters']['title']})
-            body = body["item"]
+                Key={'year': event['pathparameters']['year']})
+            body = body["Item"]
             responseBody = [
                 {'Title' : body['title'], 'Year': body['year'], 'Thumbnailuri': body[''], 'Genre': body['genre']}
             ]
