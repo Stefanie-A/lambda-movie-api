@@ -5,9 +5,9 @@ from botocore.exceptions import ClientError
 
 s3 = boto3.resource('s3')
 client = boto3.client('dynamodb')
-dynamoDB = boto3.resource('dynamoDB')
+dynamoDB = boto3.resource('dynamodb')
 table = dynamodb.Table('movie-data')
-tableName = 'movie-data'
+#tableName = 'movie-data'
 
 def lambda_handler(event, context):  
     body = {}    
