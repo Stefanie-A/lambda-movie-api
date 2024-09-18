@@ -12,7 +12,7 @@ def update_table(table):
                 'genre': 'comedy'
                 }
         )
-        table.put_item(
+    table.put_item(
             Item={
                 'title': 'gifted',
                 'year': '2017',
@@ -20,8 +20,8 @@ def update_table(table):
                 'genre': 'Drama'
             }
         )
-        table.put_item(    
-            Item3={
+    table.put_item(    
+            Item={
                 'title': 'players',
                 'year': '2024',
                 'thumbnailuri': '',
