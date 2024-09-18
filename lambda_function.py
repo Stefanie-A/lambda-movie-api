@@ -3,41 +3,12 @@ import json
 import logging
 from botocore.exceptions import ClientError
 
-s3 = boto3.resource('s3')
-client = boto3.client('dynamodb')
-dynamoDB = boto3.resource('dynamodb')
-table = dynamodb.Table('movie-data')
 #tableName = 'movie-data'
 
 def lambda_handler(event, context):  
     body = {}    
     statusCode = 200
-    table.put_item(
-        Item={
-            'title': 'Perfect find',
-            'year': '2018',
-            'thumbnailuri': '',
-            'genre': 'comedy'
-            }
-    )
-    table.put_item(
-        Item={
-            'title': 'gifted',
-            'year': '2017',
-            'thumbnailuri': '',
-            'genre': 'Drama'
-        }
-    )
-    table.put_item(    
-        Item3={
-            'title': 'players',
-            'year': '2024',
-            'thumbnailuri': '',
-            'genre': 'Romance'
-        }
-    )
-
-    try:
+        try:
         if event['routekey'] == "GET /items":
             body = table.scan()
             body = body["Items"]
@@ -68,6 +39,9 @@ def lambda_handler(event, context):
             "body": body
         }
         return res
+
+
+
    # headers = {
     #    "Content-Type": "application/json"
     #}
