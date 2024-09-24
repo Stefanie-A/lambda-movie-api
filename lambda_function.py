@@ -9,8 +9,7 @@ table = dynamoDB.Table('movies-data')
 def lambda_handler(event, context):
     print(event)
     try:
-        if event["routeKey"] == "GET /getmovies":
-            update_table(table)
+        if event["routeKey"] == "GET /movies":
             statusCode = 200
             response = table.scan()
             data = response['Items']
@@ -21,12 +20,19 @@ def lambda_handler(event, context):
                     'message': data
                 })
             }
-        elif event["routeKey"] == "GET /getmovies/{year}":
+        elif event["routeKey"] == "GET /movies/{year}":
             year = event['pathParameters']['year']
             result = table.scan(
                 FilterExpression=Attr('year').eq(year)
             )
             data = result.get("Items", [])
+            if not data:
+                return {
+                    'statusCode': 404,
+                    'body': json.dumps({
+                        'message': f'No movies found for year {year}'
+                    })
+                }
             return {
                 'statusCode': 200,
                 'body': json.dumps({
@@ -34,7 +40,7 @@ def lambda_handler(event, context):
                     'response': data
                 })
             }
-        elif event["routeKey"] == "DELETE /delmovies/{year}":
+        elif event["routeKey"] == "DELETE /movies/{year}":
             year = event['pathParameters']['year']
             result = table.scan(
                 FilterExpression=Attr('year').eq(year)
