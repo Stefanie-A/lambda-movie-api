@@ -32,7 +32,7 @@ git clone https://github.com/your-username/movie-api.git
 cd movie-api
 ```
 ### 2. Set Up DynamoDB:
-Ensure that you have a DynamoDB table named `movies-data` with a partition key `id`and an sort key `year` of type string.
+Ensure that you have a DynamoDB table named `movies-data` with a partition key `id`and an sort key `year` of type string. The `database.py` file contains the `update_table()` function which is responsible for adding default movie entries to your DynamoDB table automatically when the Lambda function is triggered.
 
 ### 3. Set Up AWS Lambda:
 Go to the AWS Console and navigate to AWS Lambda.

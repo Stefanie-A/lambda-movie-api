@@ -94,5 +94,5 @@ def update_table(table):
             'genre': 'Comedy'
             }
         )
-    
     return {"message": "successfully updated"}
+update_table(table)
