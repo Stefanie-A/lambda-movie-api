@@ -50,7 +50,7 @@ Attach a policy that grants read/write access to DynamoDB.
 
 Deploy the API:
 
-Configure API Gateway to expose the Lambda function. Create routes (/getmovies, /getmovies/{year}, /delmovies/{year}) that trigger the corresponding Lambda function for each HTTP method.
+Configure API Gateway to expose the Lambda function. Create routes (/movies, /movies/{year}, /movies/{year}) that trigger the corresponding Lambda function for each HTTP method.
 Test the Lambda Function:
 
 You can test your Lambda function directly in the AWS Console by passing mock event data or by invoking the API via Postman after the API Gateway setup.
@@ -102,7 +102,7 @@ Response (if no movies found):
 ```
 3. Delete Movies by Year (DELETE /movies/{year})
 
-DELETE /delmovies/2024
+DELETE /movies/2024
 Response (if movies deleted):
 ```
 {
