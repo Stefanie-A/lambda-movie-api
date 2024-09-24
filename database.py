@@ -7,9 +7,9 @@ def update_table(table):
     table.put_item(
             Item={
                 'id': '1',
-                'title': 'Perfect find',
-                'year': '2018',
-                'thumbnailuri': '',
+                'title': 'Only murders in the building',
+                'year': '2024',
+                'thumbnailuri': 's3://movie-buck/omtib',
                 'genre': 'comedy'
                 }
         )
@@ -18,7 +18,7 @@ def update_table(table):
                 'id': '2',
                 'title': 'gifted',
                 'year': '2017',
-                'thumbnailuri': '',
+                'thumbnailuri': 's3://movie-buck/movie',
                 'genre': 'Drama'
             }
         )
@@ -27,16 +27,16 @@ def update_table(table):
                 'id': '3',
                 'title': 'players',
                 'year': '2024',
-                'thumbnailuri': '',
+                'thumbnailuri': 's3://movie-buck/movie',
                 'genre': 'Romance'
             }
         )
     table.put_item(    
             Item={
                 'id': '4',
-                'title': 'players',
+                'title': 'Uglies',
                 'year': '2024',
-                'thumbnailuri': '',
+                'thumbnailuri': 's3://movie-buck/uglies',
                 'genre': 'Romance'
             }
         )
@@ -45,7 +45,7 @@ def update_table(table):
                 'id': '5',
                 'title': 'The union',
                 'year': '2024',
-                'thumbnailuri': '',
+                'thumbnailuri': 's3://movie-buck/movie',
                 'genre': 'Action'
             }
         )
@@ -54,7 +54,7 @@ def update_table(table):
                 'id': '6',
                 'title': 'Family switch',
                 'year': '2024',
-                'thumbnailuri': '',
+                'thumbnailuri': 's3://movie-buck/movie',
                 'genre': 'Comedy'
             }
         )
@@ -63,7 +63,7 @@ def update_table(table):
                 'id': '7',
                 'title': 'Love again',
                 'year': '2023',
-                'thumbnailuri': '',
+                'thumbnailuri': 's3://movie-buck/movie',
                 'genre': 'Romance'
             }
         )
@@ -72,7 +72,7 @@ def update_table(table):
                 'id': '8',
                 'title': 'A perfect pairing',
                 'year': '2022',
-                'thumbnailuri': '',
+                'thumbnailuri': 's3://movie-buck/movie',
                 'genre': 'Romance'
             }
         )
@@ -81,7 +81,7 @@ def update_table(table):
             'id': '9',
             'title': 'Mowgli',
             'year': '2018',
-            'thumbnailuri': '',
+            'thumbnailuri': 's3://movie-buck/movie',
             'genre': 'Adventure'
             }
         )
@@ -90,7 +90,7 @@ def update_table(table):
             'id': '10',
             'title': 'Leo',
             'year': '2023',
-            'thumbnailuri': '',
+            'thumbnailuri': 's3://movie-buck/movie',
             'genre': 'Comedy'
             }
         )
