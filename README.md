@@ -57,14 +57,14 @@ You can test your Lambda function directly in the AWS Console by passing mock ev
 ## API Endpoints
 Method	Endpoint	Description
 
-- **GET	/getmovies**	Fetches all movies in the DynamoDB table.
-- **GET	/getmovies/{year}**	Fetches all movies for a specific year.
-- **DELETE	/delmovies/{year}**	Deletes all movies for a specific year.
+- **GET	/movies**	Fetches all movies in the DynamoDB table.
+- **GET	/movies/{year}**	Fetches all movies for a specific year.
+- **DELETE	/movies/{year}**	Deletes all movies for a specific year.
 Example Requests
 
-1. Fetch All Movies (GET /getmovies)
+1. Fetch All Movies (GET /movies)
 
-GET /getmovies
+GET /movies
 ```
 {
   "message": "Movies fetched successfully",
@@ -78,9 +78,9 @@ GET /getmovies
   ]
 }
 ```
-2. Fetch Movies by Year (GET /getmovies/{year})
+2. Fetch Movies by Year (GET /movies/{year})
 
-GET /getmovies/2024
+GET /movies/2024
 ```
 Response (if movies found):
 {
@@ -100,7 +100,7 @@ Response (if no movies found):
   "message": "No movies found for year 2024"
 }
 ```
-3. Delete Movies by Year (DELETE /delmovies/{year})
+3. Delete Movies by Year (DELETE /movies/{year})
 
 DELETE /delmovies/2024
 Response (if movies deleted):
