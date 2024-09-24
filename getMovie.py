@@ -1,16 +1,16 @@
 import json
 from database import update_table  # Import the function from database.py
 import boto3
-from boto3.dynamodb.conditions import key
+from boto3.dynamodb.conditions import Key, Attr
 
 dynamoDB = boto3.resource('dynamodb')
 table = dynamoDB.Table('movies-data')
 
 def lambda_handler(event, context):
-    update_table(table)
     print(event)
     try:
         if event["routeKey"] == "GET /getmovies":
+            update_table(table)
             statusCode = 200
             response = table.scan()
             data = response['Items']
@@ -23,8 +23,8 @@ def lambda_handler(event, context):
             }
         elif event["routeKey"] == "GET /getmovies/{year}":
             year = event['pathParameters']['year']
-            result = table.query(
-                KeyConditionExpression=Key('year').eq(year)
+            result = table.scan(
+                FilterExpression=Attr('year').eq(year)
             )
             data = result.get("Items", [])
             return {
@@ -34,19 +34,27 @@ def lambda_handler(event, context):
                     'response': data
                 })
             }
-        elif event["routeKey"] == "DELETE /deletemovies/{year}":
+        elif event["routeKey"] == "DELETE /delmovies/{year}":
             year = event['pathParameters']['year']
-            result = table.query(
-                KeyConditionExpression=Key('year').eq(year)
+            result = table.scan(
+                FilterExpression=Attr('year').eq(year)
             )
             items_to_delete = result.get('Items', [])
+            if not items_to_delete:
+                return {
+                    'statusCode': 404,
+                    'body': json.dumps({
+                        'message': f'No movies found for year {year}'
+                    })
+                }
             for item in items_to_delete:
                 table.delete_item(
                     Key={
-                        'year': item['year'],  
+                        'id': item['id'],
+                        'year': item['year']
                     }
                 )
-            
+
             return {
                 'statusCode': 200,
                 'body': json.dumps({
