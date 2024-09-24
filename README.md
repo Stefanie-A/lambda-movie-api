@@ -1,6 +1,8 @@
 # Serverless Movie API
 
 ## Overview
+![API Diagram](https://github.com/Stefanie-a/api-diagram.jpeg)
+
 This project is a serverless API built using AWS Lambda, API Gateway, and DynamoDB. The API allows users to fetch, filter, and delete movies based on specific criteria such as year.
 
 ## Features
