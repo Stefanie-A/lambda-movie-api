@@ -1,39 +1,56 @@
 import json
 from database import update_table  # Import the function from database.py
 import boto3
+from boto3.dynamodb.conditions import key
 
 dynamoDB = boto3.resource('dynamodb')
 table = dynamoDB.Table('movies-data')
-update_table(table)
 
 def lambda_handler(event, context):
+    update_table(table)
     print(event)
     try:
         if event["routeKey"] == "GET /getmovies":
             statusCode = 200
-            result = update_table(table)
             response = table.scan()
             data = response['Items']
             print(data)
             return {
                 'statusCode': statusCode,
                 'body': json.dumps({
-                    'message': result,
-                    'movies': data
+                    'message': data
                 })
             }
         elif event["routeKey"] == "GET /getmovies/{year}":
-            result = table.get_item(
-                Key={
-                    'year': event['pathParameters']['year']  
-                }
+            year = event['pathParameters']['year']
+            result = table.query(
+                KeyConditionExpression=Key('year').eq(year)
             )
-            result = result.get("Item", {})
+            data = result.get("Items", [])
             return {
                 'statusCode': 200,
                 'body': json.dumps({
-                    'message': 'Movie found',
-                    'response': result
+                    'message': 'Movies found',
+                    'response': data
+                })
+            }
+        elif event["routeKey"] == "DELETE /deletemovies/{year}":
+            year = event['pathParameters']['year']
+            result = table.query(
+                KeyConditionExpression=Key('year').eq(year)
+            )
+            items_to_delete = result.get('Items', [])
+            for item in items_to_delete:
+                table.delete_item(
+                    Key={
+                        'year': item['year'],  
+                    }
+                )
+            
+            return {
+                'statusCode': 200,
+                'body': json.dumps({
+                    'message': f'All movies from year {year} deleted successfully'
                 })
             }
         else:
